@@ -1,0 +1,33 @@
+@startuml
+' Диаграмма классов
+' Отвечает на вопрос: какие основные сущености будут использоваться в системе, как они взаимодействуют
+
+title "Диаграмма классов"
+
+'Классы
+class "Потенциальные контрагенты" as PartnerList {
+    INN: Строка
+    KPP: Строка
+    Ogrn: Строка
+}
+
+class "Контактная информация" as ContactInforamtion {
+    
+}
+
+class "Анкета контагента" as Request {
+    
+}
+
+class "Пользователи" as UserList {
+    Name: Строка
+    Role: UserProfile  
+}
+
+class "Профили пользователей" as UserProfile
+
+'Взаимодействия
+ParterList --> Request
+UserProfile --> UserList::Role
+
+@enduml

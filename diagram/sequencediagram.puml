@@ -1,0 +1,35 @@
+@startuml
+
+' Диаграмма последователености
+' Отвечает на вопрос: как осуществляется взаимодействие в сложной объектной среде
+
+title "Диаграмма последовательности"
+
+' Объекты взаимодействия
+actor "Пользователь" as User
+boundary "Карточка анкеты" as PartnerCard
+control "Валидация контагента" as ValidateProc
+database "CDI"
+
+' Взаимодействия
+User --> PartnerCard ++ : кнопка "Проверить контрагента"
+PartnerCard --> ValidateProc ++ : запуск процедуры "Проверить контрагента"
+
+ValidateProc --> ValidateProc ++ : Проверить что указан ИНН и КПП
+deactivate ValidateProc
+
+ValidateProc --> ValidateProc ++ : Проверить что указан ОГРН
+deactivate ValidateProc
+
+ValidateProc --> CDI ++ : Проверить юридическое лицо
+note right
+    Проверка выполняется только для юридического лица
+end note
+
+CDI --> ValidateProc -- : Результат проверки юридического лица
+
+ValidateProc --> PartnerCard -- : Результат валидации контрагента
+PartnerCard --> User -- : Сообщение о пройденной валидации
+
+
+@enduml

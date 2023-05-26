@@ -1,0 +1,39 @@
+@startuml
+
+'Диаграмма вариатов использования
+'Отвечает на впорос: что пользователь может делать в Системе?
+
+title "Варианты использования системы"
+
+'Кастомизация
+left to right direction
+
+'Кто участвует в процессе?
+actor "Администратор" as Admin
+actor "Закупщик" as Sales
+actor "Контрагент" as Partner
+
+'Какие варианты использования (функции) системе нужны
+usecase "Регистрация закупщика" as SalesRegistration
+usecase "Регистрация контрагента" as Registration
+usecase "Добавление данных" as AddInformation
+usecase "Корректировка данных" as EditInformation
+usecase "Добавление анкеты контрагента" as AddRequestInformation
+usecase "Согласование анкеты контрагента" as AcceptRequestInformation
+usecase "Валидация данных контрагента" as CheckPartnerInformation
+usecase "Заполнение данных по ИНН" as INNService
+
+'Взаимодействия
+Admin -> SalesRegistration
+Partner -> Registration
+Sales -> AddInformation
+Sales -> EditInformation
+Sales -> AcceptRequestInformation
+Sales -> AddInformation
+Partner -> AddRequestInformation
+
+'включение и расширение вариантов использования
+AcceptRequestInformation ..> CheckPartnerInformation : Включает
+INNService ..> AddRequestInformation : Расширяет
+
+@enduml
